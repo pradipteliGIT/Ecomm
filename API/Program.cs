@@ -16,6 +16,8 @@ builder.Services.AddControllers();
 builder.Services.AddApplicationServices(builder.Configuration);
 //Extension method identity services
 builder.Services.AddIdentityServices(builder.Configuration);
+//Extension method for swagger documentation
+builder.Services.AddSwaggerDocumentation();
 
 var app = builder.Build();
 
@@ -23,10 +25,11 @@ var app = builder.Build();
 app.UseMiddleware<ExceptionMiddleware>();
 app.UseStatusCodePagesWithReExecute("/errors/{0}");
 
+
+//Swagger settings
 //if (app.Environment.IsDevelopment())
 //{
-    app.UseSwagger();
-    app.UseSwaggerUI();
+app.UseSwaggerDocumentation();
 //}
 app.UseStaticFiles();
 
